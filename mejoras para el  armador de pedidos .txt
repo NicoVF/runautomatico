@@ -1,0 +1,19 @@
+hacer que el script actualice el chromedriver automáticamente
+
+Que te pregunte las cosas antes de abrir el navegador
+
+Que diga solo el apellido
+
+q la fecha dia/mes/año en barras
+
+que te consulte si queres agregar un nuevo pedido
+
+que te pregunte si hay q repartir a todos o a nadie
+
+ver si sigue pasando lo de que no te agrega la marca al final
+
+que compartan las credenciales con el autorepartidor
+
+sacar colorama del autorepartidor
+
+ponerle bien el nombre al sobrante
