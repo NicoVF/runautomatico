@@ -1,7 +1,2 @@
-https://www.python.org/downloads/
-https://code.visualstudio.com/Download
-https://chromedriver.chromium.org/downloads La version que coincida con chrome
-
-el chrome driver debe quedarse en el mismo directorio que el resto de los archivos.
-
-pueden crearse accesos directos de los bats
+selenium
+webdriver_manager

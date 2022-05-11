@@ -1,2 +1,0 @@
-python autorepartidor.py
-PAUSE

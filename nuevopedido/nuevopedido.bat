@@ -1,2 +1,0 @@
-python nuevopedido.py
-PAUSE
