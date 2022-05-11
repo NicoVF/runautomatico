@@ -2,20 +2,18 @@
 
 Herramientas para la gestión administrativa de Run0km
 
-Repartir sobrante automáticamente
+- Repartir sobrante automáticamente
+- Crear nuevos pedidos con (o sin) prefijos de forma automática
 
-Crear nuevos pedidos con (o sin) prefijos de forma automática
+# __Instalación__
 
--- Instalación --
+### Pre requisitos
+1. Tener python instalado
 
-Pre requisitos:
-Tener python instalado
+### Puesta en marcha
 
-Una vez clonado, ir a requerimientos y ejecutar instalador.bat
-
-Luego copiar el archivo credenciales-example.json y renombrarlo credenciales.json
-
-y cambiar las credenciales por las tuyas, y guardar el archivo
-
-Una vez instalado, ejecutar runautomatico.bat
-
+1. Clonar el repositorio
+2. Ir a requerimientos y ejecutar instalador.bat
+3. Copiar el archivo credenciales-example.json y renombrarlo credenciales.json
+4. En credenciales.json cambiar las credenciales de ejemplo por las tuyas, y guardar el archivo
+5. Ejecutar runautomatico.bat
