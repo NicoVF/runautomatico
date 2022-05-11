@@ -51,7 +51,7 @@ def main():
                         time.sleep(2)
                         driver.get(
                                 "https://delivery.run0km.com/admin/prospectos/pedidodeprospecto/add/")
-                        time.sleep(2)
+                        time.sleep(10)
 
                         # campo
                         if(tiene_prefijos == 'si'):
