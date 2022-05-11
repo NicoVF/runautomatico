@@ -97,9 +97,13 @@ def main():
                                 driver.find_element_by_xpath('//*[@id="id_asignar_a"]/option[2]').click()
 
                         if(tiene_prefijos == 'no'):
-                                driver.find_element_by_id('id_restringir_por_datos_diarios').click()
-                                driver.find_element_by_id('id_restringir_por_datos_nuevos').click()
-                                driver.find_element_by_id('id_restringir_por_acceso').click()
+                                if(aCargo == 'si'):
+                                        driver.find_element_by_id('id_restringir_por_datos_diarios').click()
+                                        driver.find_element_by_id('id_restringir_por_acceso').click()
+                                else:
+                                        driver.find_element_by_id('id_restringir_por_datos_nuevos').click()
+                                        driver.find_element_by_id('id_restringir_por_datos_diarios').click()
+                                        driver.find_element_by_id('id_restringir_por_acceso').click()
                         else:
                                 driver.find_element_by_id('id_restringir_por_acceso').click()
 
