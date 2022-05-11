@@ -15,6 +15,7 @@ def main():
 
     chromeOptions = webdriver.ChromeOptions()
     chromeOptions.headless = False
+    chromeOptions.add_experimental_option("detach", True)
     seleniumService = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=seleniumService, options=chromeOptions)
 
@@ -108,7 +109,7 @@ def main():
         time.sleep(1)
         driver.find_element_by_xpath("//*[@id='id_accion']/option[2]").click()
         time.sleep(1)
-        driver.find_element_by_xpath("//*[@id='id_responsables']/option[121]").click()
+        driver.find_element_by_xpath("//select[@id='id_responsables']/option[@value='4704']").click()
         time.sleep(1)
         from datetime import datetime
         

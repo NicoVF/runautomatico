@@ -15,13 +15,13 @@ def main():
 
         time.sleep(6)
 
-        nombre_del_pedido = input('Nombre del concesionario: ').capitalize()
-        nombre_del_supervisor = input('Nombre del supervisor: ')
+        nombre_del_pedido = input('Nombre del concesionario? ').capitalize()
+        nombre_del_supervisor = input('Nombre del supervisor? No olvides los acentos ')
         nta = nombre_del_supervisor.split(' ')
         credito = input('Cantidad de credito: ')
         aCargo = input('El pedido es a cargo del supervisor? Si/No: ').lower()
-        marca = input('Marca: ').lower()
-        tiene_prefijos = input("Incluye prefijos Si/No: ").lower()
+        marca = input('Marca? ').lower()
+        tiene_prefijos = input("Incluye prefijos? Si/No: ").lower()
         terminarAlgoritmo = False
 
         if(tiene_prefijos == 'si'):
@@ -145,11 +145,9 @@ def main():
                                         print("No fue posible agregar calidades, error: ",e)
 
                         time.sleep(1)
-                        print(nombre_del_supervisor)
                         try:
                                 super_path = "//*[@id='id_supervisor']/option[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'" + \
                                         nombre_del_supervisor+"')]"
-                                print(super_path)
                                 driver.find_element_by_xpath(super_path).click()
                         except Exception as e:
                                         print("No fue posible agregar al supervisor, error: ",e)
