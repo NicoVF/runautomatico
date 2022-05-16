@@ -192,7 +192,7 @@ def main():
 
 
                         terminar = input("Tiene mas pedidos para cargar?")
-                        if(terminar.lower() == "No"):
+                        if(terminar.lower() == "no"):
                                 terminarAlgoritmo = True
         except:
                 print("algo fallo", sys.exc_info()[0], "error")
