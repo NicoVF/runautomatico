@@ -8,10 +8,10 @@ def main():
     from selenium.webdriver.chrome.service import Service
     from selenium.common.exceptions import NoSuchElementException
     from selenium.webdriver.common.by import By
+    from datetime import datetime
     import sys
     import time
     import json
-
 
     chromeOptions = webdriver.ChromeOptions()
     chromeOptions.headless = False
@@ -30,51 +30,48 @@ def main():
     #link.click()
 
     try:
-
         with open("credenciales.json") as file:
-            credentials=json.load(file)
-        driver.find_element_by_id("id_username").send_keys(credentials["username"])
-        driver.find_element_by_id("id_password").send_keys(credentials["password"])
+            credentials = json.load(file)
+        driver.find_element(By.ID, "id_username").send_keys(credentials["username"])
+        driver.find_element(By.ID,"id_password").send_keys(credentials["password"])
             
         #repartiendo datos STD
-        getin = driver.find_element_by_css_selector("input[type='submit']")
+        getin = driver.find_element(By.CSS_SELECTOR,"input[type='submit']")
         getin.click()
         time.sleep(1)
         driver.get('https://delivery.run0km.com/admin/prospectos/prospecto/asignacion_inicial/')
         time.sleep(1)
-        driver.find_element_by_id("id_asignar_segun_0").click()
+        driver.find_element(By.ID,"id_asignar_segun_0").click()
         time.sleep(1)
-        driver.find_element_by_id("id_metodo_por_productividad").click()
+        driver.find_element(By.ID,"id_metodo_por_productividad").click()
         time.sleep(1)
-        driver.find_element_by_id("id_aplicar_restricciones_del_pedido").click()
+        driver.find_element(By.ID,"id_aplicar_restricciones_del_pedido").click()
         time.sleep(1)
-        driver.find_element_by_id("id_restricciones_0").click()
+        driver.find_element(By.ID,"id_restricciones_0").click()
         time.sleep(1)
-        from datetime import datetime
         
-        driver.find_element_by_id("id_fecha_desde").send_keys(datetime.today().strftime('%Y-%m-%d'))
+        
+        driver.find_element(By.ID,"id_fecha_desde").send_keys(datetime.today().strftime('%Y-%m-%d'))
         time.sleep(1)
-        driver.find_element_by_id("id_accion").click()
+        driver.find_element(By.ID,"id_accion").click()
         time.sleep(4)
-        driver.find_element_by_css_selector("input[type='submit' i]").click()
+        driver.find_element(By.CSS_SELECTOR,"input[type='submit' i]").click()
         time.sleep(10)
 
         #repartiendo datos STD y PREM por supervisor
         driver.get('https://delivery.run0km.com/admin/prospectos/prospecto/asignacion_inicial/')
         time.sleep(1)
-        driver.find_element_by_id("id_asignar_segun_0").click()
+        driver.find_element(By.ID,"id_asignar_segun_0").click()
         time.sleep(1)
-        driver.find_element_by_id("id_metodo_por_productividad").click()
+        driver.find_element(By.ID,"id_metodo_por_productividad").click()
         time.sleep(1)
-        driver.find_element_by_id("id_aplicar_restricciones_del_pedido").click()
+        driver.find_element(By.ID,"id_aplicar_restricciones_del_pedido").click()
         time.sleep(1)
-        from datetime import datetime
-        
-        driver.find_element_by_id("id_fecha_desde").send_keys(datetime.today().strftime('%Y-%m-%d'))
+        driver.find_element(By.ID,"id_fecha_desde").send_keys(datetime.today().strftime('%Y-%m-%d'))
         time.sleep(1)
-        driver.find_element_by_xpath("//*[@id='id_accion']/option[2]").click()
+        driver.find_element(By.XPATH,"//*[@id='id_accion']/option[2]").click()
         time.sleep(1)
-        driver.find_element_by_id("id_accion").click()
+        driver.find_element(By.ID,"id_accion").click()
         time.sleep(4)
         #driver.find_element_by_css_selector("input[type='submit' i]").click()
         time.sleep(10)
@@ -83,39 +80,39 @@ def main():
         #repartiendo datos PREM
         driver.get('https://delivery.run0km.com/admin/prospectos/prospecto/asignacion_inicial/')
         time.sleep(1)
-        driver.find_element_by_id("id_asignar_segun_0").click()
+        driver.find_element(By.ID,"id_asignar_segun_0").click()
         time.sleep(1)
-        driver.find_element_by_id("id_metodo_por_productividad").click()
+        driver.find_element(By.ID,"id_metodo_por_productividad").click()
         time.sleep(1)
-        driver.find_element_by_id("id_aplicar_restricciones_del_pedido").click()
+        driver.find_element(By.ID,"id_aplicar_restricciones_del_pedido").click()
         time.sleep(1)
-        driver.find_element_by_xpath("//*[@id='id_origen']/option[3]").click()
+        driver.find_element(By.XPATH,"//*[@id='id_origen']/option[3]").click()
         time.sleep(1)
         from datetime import datetime
         
-        driver.find_element_by_id("id_fecha_desde").send_keys(datetime.today().strftime('%Y-%m-%d'))
+        driver.find_element(By.ID,"id_fecha_desde").send_keys(datetime.today().strftime('%Y-%m-%d'))
         time.sleep(1)
-        driver.find_element_by_id("id_accion").click()
+        driver.find_element(By.ID,"id_accion").click()
         time.sleep(4)
         
-        driver.find_element_by_css_selector("input[type='submit' i]").click()
+        driver.find_element(By.CSS_SELECTOR, "input[type='submit' i]").click()
         time.sleep(8)
         
 
         #Tirando sobrante
         driver.get('https://delivery.run0km.com/admin/prospectos/prospecto/asignacion_inicial/')
         time.sleep(1)
-        driver.find_element_by_id("id_asignar_segun_1").click()
+        driver.find_element(By.ID,"id_asignar_segun_1").click()
         time.sleep(1)
-        driver.find_element_by_xpath("//*[@id='id_accion']/option[2]").click()
+        driver.find_element(By.XPATH,"//*[@id='id_accion']/option[2]").click()
         time.sleep(1)
-        driver.find_element_by_xpath("//select[@id='id_responsables']/option[@value='4704']").click()
+        driver.find_element(By.XPATH,"//select[@id='id_responsables']/option[@value='4704']").click()
         time.sleep(1)
         from datetime import datetime
         
-        driver.find_element_by_id("id_fecha_desde").send_keys(datetime.today().strftime('%Y-%m-%d'))
+        driver.find_element(By.ID, "id_fecha_desde").send_keys(datetime.today().strftime('%Y-%m-%d'))
         time.sleep(1)
-        driver.find_element_by_id("id_accion").click()
+        driver.find_element(By.ID,"id_accion").click()
         time.sleep(4)
         
         #antes de repartir, revisar cuantos sobraron
@@ -127,10 +124,12 @@ def main():
         
 
 
-    except:
-        print("algo fallo", sys.exc_info()[0], " error")
+    except Exception as e:
+        print("algo fallo", e, " error")
         time.sleep(1)
 
 
         
     print("finish")
+
+main()
