@@ -1,0 +1,2 @@
+cd autorepartir
+py autorepartidor_usados_y_jeep.py

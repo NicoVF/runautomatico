@@ -1,7 +1,4 @@
 def main():
-        
-    print("--- AUTOREPARTIDOR ---")
-    print(f"Delivering at {datetime.today().strftime('%Y-%m-%d')}")
     from selenium import webdriver
     from selenium.webdriver.common.keys import Keys
     from selenium.webdriver.chrome.options import Options
@@ -15,7 +12,9 @@ def main():
     import sys
     import time
     import json
-
+    
+    print("--- AUTOREPARTIDOR ---")
+    print(f"Delivering at {datetime.today().strftime('%Y-%m-%d')}")
     chromeOptions = webdriver.ChromeOptions()
     chromeOptions.headless = False
     chromeOptions.add_experimental_option("detach", True)
@@ -65,7 +64,7 @@ def main():
         time.sleep(1)
         driver.find_element(By.CSS_SELECTOR,"input[type='submit' i]").click()
         time.sleep(120)
-        driver.close()
+        #driver.close()
 
     except Exception as e:
         print("algo fallo", e, " error")
