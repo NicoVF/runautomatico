@@ -2,3 +2,7 @@
 credenciales.json
 autorepartir/__pycache__/autorepartidor.cpython-310.pyc
 nuevopedido/__pycache__/nuevopedido.cpython-310.pyc
+*.xml
+*.iml
+*.pyc
+*.idea
