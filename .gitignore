@@ -6,3 +6,4 @@ nuevopedido/__pycache__/nuevopedido.cpython-310.pyc
 *.iml
 *.pyc
 *.idea
+*.log
