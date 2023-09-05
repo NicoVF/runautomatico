@@ -100,7 +100,7 @@ def send_email(imagenes):
     fecha_y_hora_actual = current_date() + " " + current_time()
     mail_sender = MailSender(credentials["email_sender_username"], credentials["email_pass"])
     mail_sender.send(credentials["email_sender_username"], credentials["email_receivers"],
-                     f"TEST - Forzado automatico - {fecha_y_hora_actual}", message=mensaje, images=imagenes)
+                     f"Forzado automatico - {fecha_y_hora_actual}", message=mensaje, images=imagenes)
     print(f"\nSe envio un email a {credentials['email_receivers'][0]} a las {current_time()} con las imagenes:\n")
     for imagen in imagenes:
         print(f"{imagen}")
