@@ -1,4 +1,9 @@
 {
-    "username":"TUUSERNAMEACA",
-    "password":"TUPASSWORDACA"
+    "action": "",
+    "directory": "",
+    "email_sender_username": "",
+    "email_pass": "",
+    "email_receivers": [],
+    "login_url": "",
+    "repartir_url": ""
 }
