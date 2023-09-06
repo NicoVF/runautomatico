@@ -11,7 +11,7 @@ import time
 import json
 
 
-def repartir_datos_STD(driver, imagenes, con_fecha_de_hoy=True):
+def repartir_datos_STD_y_PREM(driver, imagenes, con_fecha_de_hoy=True):
     open_url(credentials["repartir_url"], driver)
     time.sleep(1)
     driver.find_element(By.ID, "id_asignar_segun_0").click()
@@ -161,12 +161,10 @@ try:
 
     open_url(credentials["login_url"], driver)
     login(driver)
-    repartir_datos_STD(driver, imagenes)
-    repartir_datos_STD(driver, imagenes, con_fecha_de_hoy=False)
+    repartir_datos_STD_y_PREM(driver, imagenes)
+    repartir_datos_STD_y_PREM(driver, imagenes, con_fecha_de_hoy=False)
     repartir_datos_STD_y_PREM_por_SUPERVISOR(driver, imagenes)
     repartir_datos_STD_y_PREM_por_SUPERVISOR(driver, imagenes, con_fecha_de_hoy=False)
-    repartir_datos_PREM(driver, imagenes)
-    repartir_datos_PREM(driver, imagenes, con_fecha_de_hoy=False)
     send_email(imagenes)
 
 except Exception as e:
