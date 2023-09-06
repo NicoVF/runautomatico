@@ -42,6 +42,8 @@ def repartir_datos_STD_y_PREM_por_SUPERVISOR(driver, imagenes, con_fecha_de_hoy=
     time.sleep(1)
     driver.find_element(By.ID, "id_aplicar_restricciones_del_pedido").click()
     time.sleep(1)
+    driver.find_element(By.ID, "id_restricciones_0").click()
+    time.sleep(1)
     nombre_de_screenshot = "STD y PREM por SUPERVISOR sin fecha"
     if con_fecha_de_hoy:
         driver.find_element(By.ID, "id_fecha_desde").send_keys(fecha_actual)
