@@ -3,12 +3,12 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 #from mailsender.mailsender import MailSender
-import sys
-sys.path.append('..//mailsender')
 from mailsender import MailSender
 import datetime
 import time
 import json
+import sys
+sys.path.append('..//mailsender')
 
 
 def repartir_datos_STD_y_PREM(driver, imagenes, con_fecha_de_hoy=True):
@@ -27,7 +27,11 @@ def repartir_datos_STD_y_PREM(driver, imagenes, con_fecha_de_hoy=True):
         driver.find_element(By.ID, "id_fecha_desde").send_keys(fecha_actual)
         time.sleep(4)
         nombre_de_screenshot = "STD y PREM con fecha de HOY"
+    driver.find_element(By.ID, "id_accion").click()
+    time.sleep(4)
     driver.find_element(By.CSS_SELECTOR, "input[type='submit' i]").click()
+    time.sleep(110)
+    driver.execute_script("document.body.style.zoom='50%'")
     time.sleep(10)
     take_screenshot(driver, imagenes, nombre_de_screenshot)
     print(f"Se repartio {nombre_de_screenshot} a las {current_time_with_seconds()}")
@@ -52,7 +56,10 @@ def repartir_datos_STD_y_PREM_por_SUPERVISOR(driver, imagenes, con_fecha_de_hoy=
     driver.find_element(By.XPATH, "//*[@id='id_accion']/option[2]").click()
     time.sleep(1)
     driver.find_element(By.ID, "id_accion").click()
+    time.sleep(1)
     driver.find_element(By.CSS_SELECTOR, "input[type='submit' i]").click()
+    time.sleep(110)
+    driver.execute_script("document.body.style.zoom='50%'")
     time.sleep(10)
     take_screenshot(driver, imagenes, nombre_de_screenshot)
     print(f"Se repartio {nombre_de_screenshot} a las {current_time_with_seconds()}")
@@ -71,11 +78,14 @@ def repartir_datos_PREM(driver, imagenes, con_fecha_de_hoy=True):
     nombre_de_screenshot = "PREM sin fecha"
     if con_fecha_de_hoy:
         driver.find_element(By.ID, "id_fecha_desde").send_keys(fecha_actual)
-        time.sleep(1)
+        time.sleep(4)
         nombre_de_screenshot = "PREM con fecha de HOY"
+    time.sleep(1)
     driver.find_element(By.ID, "id_accion").click()
     time.sleep(4)
     driver.find_element(By.CSS_SELECTOR, "input[type='submit' i]").click()
+    time.sleep(110)
+    driver.execute_script("document.body.style.zoom='50%'")
     time.sleep(10)
     take_screenshot(driver, imagenes, nombre_de_screenshot)
     print(f"Se repartio {nombre_de_screenshot} a las {current_time_with_seconds()}")
@@ -173,4 +183,3 @@ except Exception as e:
 
 driver.close()
 driver.quit()
-
