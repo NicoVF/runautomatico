@@ -3,12 +3,12 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 #from mailsender.mailsender import MailSender
+import sys
+sys.path.append('..//mailsender')
 from mailsender import MailSender
 import datetime
 import time
 import json
-import sys
-sys.path.append('..//mailsender')
 
 
 def repartir_datos_STD_y_PREM(driver, imagenes, con_fecha_de_hoy=True):
@@ -107,12 +107,13 @@ def tirar_sobrante_con_fecha_de_hoy(driver, imagenes):
     time.sleep(13)
 
 
-def send_email(imagenes):
+def send_email(imagenes, txt_files):
     mensaje = "Se forzaron los siguientes datos:"
     fecha_y_hora_actual = current_date() + " " + current_time()
     mail_sender = MailSender(credentials["email_sender_username"], credentials["email_pass"])
     mail_sender.send(credentials["email_sender_username"], credentials["email_receivers"],
-                     f"Forzado automatico - {fecha_y_hora_actual}", message=mensaje, images=imagenes)
+                     f"Forzado automatico - {fecha_y_hora_actual}", message=mensaje,
+                     images=imagenes, txt_files=txt_files)
     print(f"\nSe envio un email a {credentials['email_receivers'][0]} a las {current_time()} con las imagenes:\n")
     for imagen in imagenes:
         print(f"{imagen}")
@@ -120,7 +121,7 @@ def send_email(imagenes):
 
 def take_screenshot(driver, imagenes, nombre):
     fecha_y_hora_actual = current_date() + " " + current_time_with_seconds()
-    driver.get_screenshot_as_file(f"screenshots/{fecha_y_hora_actual.replace(':','.') + ' - ' + nombre}.png")
+    driver.get_screenshot_as_file(f"screenshots/{fecha_y_hora_actual.replace(':', '.') + ' - ' + nombre}.png")
     imagenes.append(f"screenshots/{fecha_y_hora_actual.replace(':','.') + ' - ' + nombre}.png")
 
 
@@ -164,6 +165,8 @@ print(f"\nFecha: {fecha_actual + ' ' +current_time()}\n")
 
 driver = get_webdriver()
 imagenes = list()
+txt_files = list()
+txt_files.append(f"log_{str(datetime.datetime.now().strftime('%Y-%m'))}.log")
 
 try:
     with open("../credenciales.json") as file:
@@ -175,7 +178,7 @@ try:
     repartir_datos_STD_y_PREM(driver, imagenes, con_fecha_de_hoy=False)
     repartir_datos_STD_y_PREM_por_SUPERVISOR(driver, imagenes)
     repartir_datos_STD_y_PREM_por_SUPERVISOR(driver, imagenes, con_fecha_de_hoy=False)
-    send_email(imagenes)
+    send_email(imagenes, txt_files)
 
 except Exception as e:
     print("Error al repartir los datos: ", e)
