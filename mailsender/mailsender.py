@@ -12,7 +12,7 @@ class MailSender:
         self.port = port
         self.use_tls = use_tls
 
-    def send(self, sender, receivers, subject, message='', images=None):
+    def send(self, sender, receivers, subject, message='', images=None, txt_files=None):
         msg = MIMEMultipart()
         msg['Subject'] = subject
         msg['From'] = sender
@@ -20,6 +20,8 @@ class MailSender:
         self._get_msg_text(message, msg)
         if images:
             self._get_msg_images(images, msg)
+        if txt_files:
+            self._get_msg_txt_file(txt_files, msg)
         self._send_msg(msg, receivers, sender)
 
     def _send_msg(self, msg, recipients, sender):
@@ -45,5 +47,12 @@ class MailSender:
         text = MIMEText(message)
         msg_text.attach(text)
         msg.attach(msg_text)
+
+    def _get_msg_txt_file(self, txt_files, msg):
+        for file in txt_files:
+            with open(file) as f:
+                msg_txt_file = MIMEText(f.read())
+                msg_txt_file.add_header('Content-Disposition', 'attachment', filename=file)
+                msg.attach(msg_txt_file)
 
 
