@@ -114,7 +114,7 @@ def send_email(imagenes, txt_files):
     mail_sender.send(credentials["email_sender_username"], credentials["email_receivers"],
                      f"Forzado automatico - {fecha_y_hora_actual}", message=mensaje,
                      images=imagenes, txt_files=txt_files)
-    print(f"\nSe envio un email a {credentials['email_receivers'][0]} a las {current_time()} con las imagenes:\n")
+    print(f"\nSe envio un email a {credentials['email_receivers']} a las {current_time()} con las imagenes:\n")
     for imagen in imagenes:
         print(f"{imagen}")
 
