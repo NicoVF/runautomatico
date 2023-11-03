@@ -175,9 +175,9 @@ try:
     open_url(credentials["login_url"], driver)
     login(driver)
     repartir_datos_STD_y_PREM(driver, imagenes)
-    repartir_datos_STD_y_PREM(driver, imagenes, con_fecha_de_hoy=False)
+    #repartir_datos_STD_y_PREM(driver, imagenes, con_fecha_de_hoy=False)
     repartir_datos_STD_y_PREM_por_SUPERVISOR(driver, imagenes)
-    repartir_datos_STD_y_PREM_por_SUPERVISOR(driver, imagenes, con_fecha_de_hoy=False)
+    #repartir_datos_STD_y_PREM_por_SUPERVISOR(driver, imagenes, con_fecha_de_hoy=False)
 
 
 except Exception as e:
