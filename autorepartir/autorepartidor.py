@@ -198,6 +198,18 @@ def tirar_sobrante_con_fecha_de_hoy(driver, imagenes):
     time.sleep(13)
 
 
+def guardar_datos_restantes(driver, imagenes):
+    open_url(credentials["repartir_url"], driver)
+    time.sleep(1)
+    driver.execute_script("document.body.style.zoom='70%'")
+    time.sleep(2)
+    driver.execute_script("window.scrollBy(0,250)", "")
+    time.sleep(2)
+    nombre_de_screenshot = f"DATOS RESTANTES DE HOY a las {current_time_with_seconds()}"
+    take_screenshot(driver, imagenes, nombre_de_screenshot)
+    print(f"Se guardo la screenshot {nombre_de_screenshot}")
+
+
 def send_email(imagenes, txt_files):
     mensaje = "Se forzaron los siguientes datos:"
     fecha_y_hora_actual = current_date() + " " + current_time()
@@ -282,6 +294,7 @@ try:
     # repartir_datos_STD_y_PREM_por_SUPERVISOR(driver, imagenes)
     # repartir_datos_STD_y_PREM_por_SUPERVISOR(driver, imagenes, con_fecha_de_hoy=False)
 
+    guardar_datos_restantes(driver, imagenes)
 
 except Exception as e:
     print("Error al repartir los datos: ", e)
