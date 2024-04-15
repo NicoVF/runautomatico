@@ -2,8 +2,9 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-#from mailsender.mailsender import MailSender
+# from mailsender.mailsender import MailSender
 import sys
+
 sys.path.append('..//mailsender')
 from mailsender import MailSender
 import datetime
@@ -11,7 +12,33 @@ import time
 import json
 
 
-def repartir_datos_STD_y_PREM(driver, imagenes, con_fecha_de_hoy=True):
+def repartir_datos_STD_y_PREM_por_pedido(driver, imagenes, con_fecha_de_hoy=True):
+    open_url(credentials["repartir_url"], driver)
+    time.sleep(1)
+    driver.find_element(By.ID, "id_asignar_segun_0").click()
+    time.sleep(1)
+    driver.find_element(By.ID, "id_metodo_por_productividad").click()
+    time.sleep(1)
+    # driver.find_element(By.ID, "id_aplicar_restricciones_del_pedido").click()
+    # time.sleep(1)
+    # driver.find_element(By.ID, "id_restricciones_0").click()
+    # time.sleep(1)
+    nombre_de_screenshot = "STD y PREM sin fecha"
+    if con_fecha_de_hoy:
+        driver.find_element(By.ID, "id_fecha_desde").send_keys(fecha_actual)
+        time.sleep(4)
+        nombre_de_screenshot = "STD y PREM con fecha de HOY - Por pedido"
+    driver.find_element(By.ID, "id_accion").click()
+    time.sleep(4)
+    driver.find_element(By.CSS_SELECTOR, "input[type='submit' i]").click()
+    time.sleep(110)
+    driver.execute_script("document.body.style.zoom='50%'")
+    time.sleep(10)
+    take_screenshot(driver, imagenes, nombre_de_screenshot)
+    print(f"Se repartio {nombre_de_screenshot} a las {current_time_with_seconds()}")
+
+
+def repartir_datos_STD_y_PREM_por_acceso_por_datos_nuevos_y_datos_diarios(driver, imagenes, con_fecha_de_hoy=True):
     open_url(credentials["repartir_url"], driver)
     time.sleep(1)
     driver.find_element(By.ID, "id_asignar_segun_0").click()
@@ -22,11 +49,75 @@ def repartir_datos_STD_y_PREM(driver, imagenes, con_fecha_de_hoy=True):
     time.sleep(1)
     driver.find_element(By.ID, "id_restricciones_0").click()
     time.sleep(1)
+    driver.find_element(By.ID, "id_restricciones_1").click()
+    time.sleep(1)
+    driver.find_element(By.ID, "id_restricciones_2").click()
+    time.sleep(1)
     nombre_de_screenshot = "STD y PREM sin fecha"
     if con_fecha_de_hoy:
         driver.find_element(By.ID, "id_fecha_desde").send_keys(fecha_actual)
         time.sleep(4)
-        nombre_de_screenshot = "STD y PREM con fecha de HOY"
+        nombre_de_screenshot = "STD y PREM con fecha de HOY - Por datos diarios, datos nuevos, y por acceso"
+    driver.find_element(By.ID, "id_accion").click()
+    time.sleep(4)
+    driver.find_element(By.CSS_SELECTOR, "input[type='submit' i]").click()
+    time.sleep(110)
+    driver.execute_script("document.body.style.zoom='50%'")
+    time.sleep(10)
+    take_screenshot(driver, imagenes, nombre_de_screenshot)
+    print(f"Se repartio {nombre_de_screenshot} a las {current_time_with_seconds()}")
+
+
+def repartir_datos_STD_y_PREM_por_acceso_y_datos_diarios(driver, imagenes, con_fecha_de_hoy=True):
+    open_url(credentials["repartir_url"], driver)
+    time.sleep(1)
+    driver.find_element(By.ID, "id_asignar_segun_0").click()
+    time.sleep(1)
+    driver.find_element(By.ID, "id_metodo_por_productividad").click()
+    time.sleep(1)
+    driver.find_element(By.ID, "id_aplicar_restricciones_del_pedido").click()
+    time.sleep(1)
+    driver.find_element(By.ID, "id_restricciones_0").click()
+    time.sleep(1)
+    # driver.find_element(By.ID, "id_restricciones_1").click()
+    # time.sleep(1)
+    driver.find_element(By.ID, "id_restricciones_2").click()
+    time.sleep(1)
+    nombre_de_screenshot = "STD y PREM sin fecha"
+    if con_fecha_de_hoy:
+        driver.find_element(By.ID, "id_fecha_desde").send_keys(fecha_actual)
+        time.sleep(4)
+        nombre_de_screenshot = "STD y PREM con fecha de HOY - Por datos diarios y por acceso"
+    driver.find_element(By.ID, "id_accion").click()
+    time.sleep(4)
+    driver.find_element(By.CSS_SELECTOR, "input[type='submit' i]").click()
+    time.sleep(110)
+    driver.execute_script("document.body.style.zoom='50%'")
+    time.sleep(10)
+    take_screenshot(driver, imagenes, nombre_de_screenshot)
+    print(f"Se repartio {nombre_de_screenshot} a las {current_time_with_seconds()}")
+
+
+def repartir_datos_STD_y_PREM_datos_diarios(driver, imagenes, con_fecha_de_hoy=True):
+    open_url(credentials["repartir_url"], driver)
+    time.sleep(1)
+    driver.find_element(By.ID, "id_asignar_segun_0").click()
+    time.sleep(1)
+    driver.find_element(By.ID, "id_metodo_por_productividad").click()
+    time.sleep(1)
+    driver.find_element(By.ID, "id_aplicar_restricciones_del_pedido").click()
+    time.sleep(1)
+    driver.find_element(By.ID, "id_restricciones_0").click()
+    time.sleep(1)
+    # driver.find_element(By.ID, "id_restricciones_1").click()
+    # time.sleep(1)
+    # driver.find_element(By.ID, "id_restricciones_2").click()
+    # time.sleep(1)
+    nombre_de_screenshot = "STD y PREM sin fecha"
+    if con_fecha_de_hoy:
+        driver.find_element(By.ID, "id_fecha_desde").send_keys(fecha_actual)
+        time.sleep(4)
+        nombre_de_screenshot = "STD y PREM con fecha de HOY - Por datos diarios"
     driver.find_element(By.ID, "id_accion").click()
     time.sleep(4)
     driver.find_element(By.CSS_SELECTOR, "input[type='submit' i]").click()
@@ -122,7 +213,7 @@ def send_email(imagenes, txt_files):
 def take_screenshot(driver, imagenes, nombre):
     fecha_y_hora_actual = current_date() + " " + current_time_with_seconds()
     driver.get_screenshot_as_file(f"screenshots/{fecha_y_hora_actual.replace(':', '.') + ' - ' + nombre}.png")
-    imagenes.append(f"screenshots/{fecha_y_hora_actual.replace(':','.') + ' - ' + nombre}.png")
+    imagenes.append(f"screenshots/{fecha_y_hora_actual.replace(':', '.') + ' - ' + nombre}.png")
 
 
 def login(driver):
@@ -161,7 +252,7 @@ def current_time_with_seconds():
 fecha_actual = current_date()
 
 print("--- AUTOREPARTIDOR ---")
-print(f"\nFecha: {fecha_actual + ' ' +current_time()}\n")
+print(f"\nFecha: {fecha_actual + ' ' + current_time()}\n")
 
 driver = get_webdriver()
 imagenes = list()
@@ -174,16 +265,29 @@ try:
 
     open_url(credentials["login_url"], driver)
     login(driver)
-    repartir_datos_STD_y_PREM(driver, imagenes)
-    #repartir_datos_STD_y_PREM(driver, imagenes, con_fecha_de_hoy=False)
-    repartir_datos_STD_y_PREM_por_SUPERVISOR(driver, imagenes)
-    #repartir_datos_STD_y_PREM_por_SUPERVISOR(driver, imagenes, con_fecha_de_hoy=False)
+    if (datetime.datetime.now().hour == 8 or
+            datetime.datetime.now().hour == 9 or
+            datetime.datetime.now().hour == 11):
+        repartir_datos_STD_y_PREM_por_pedido(driver, imagenes)
+    if (datetime.datetime.now().hour == 15 or
+            datetime.datetime.now().hour == 20 or
+            datetime.datetime.now().hour == 23):
+        repartir_datos_STD_y_PREM_por_acceso_por_datos_nuevos_y_datos_diarios(driver, imagenes)
+        repartir_datos_STD_y_PREM_por_acceso_y_datos_diarios(driver, imagenes)
+    if datetime.datetime.now().hour == 20:
+        if datetime.datetime.now().weekday() == 5 or datetime.datetime.now().weekday() == 6:
+            repartir_datos_STD_y_PREM_datos_diarios(driver, imagenes)
+
+    # repartir_datos_STD_y_PREM(driver, imagenes, con_fecha_de_hoy=False)
+    # repartir_datos_STD_y_PREM_por_SUPERVISOR(driver, imagenes)
+    # repartir_datos_STD_y_PREM_por_SUPERVISOR(driver, imagenes, con_fecha_de_hoy=False)
 
 
 except Exception as e:
     print("Error al repartir los datos: ", e)
     time.sleep(1)
 
-send_email(imagenes, txt_files)
+if len(imagenes) > 0:
+    send_email(imagenes, txt_files)
 driver.close()
 driver.quit()
