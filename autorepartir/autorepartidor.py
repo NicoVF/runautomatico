@@ -205,9 +205,9 @@ def guardar_datos_restantes(driver, imagenes):
     time.sleep(2)
     driver.execute_script("window.scrollBy(0,250)", "")
     time.sleep(2)
-    nombre_de_screenshot = f"DATOS RESTANTES DE HOY a las {current_time_with_seconds()}"
+    nombre_de_screenshot = f"DATOS RESTANTES DE HOY despues de forzar datos"
     take_screenshot(driver, imagenes, nombre_de_screenshot)
-    print(f"Se guardo la screenshot {nombre_de_screenshot}")
+    print(f"Se guardo la screenshot {nombre_de_screenshot} a las {current_time_with_seconds()}")
 
 
 def send_email(imagenes, txt_files):
