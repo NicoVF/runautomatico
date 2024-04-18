@@ -198,14 +198,13 @@ def tirar_sobrante_con_fecha_de_hoy(driver, imagenes):
     time.sleep(13)
 
 
-def guardar_datos_restantes(driver, imagenes):
+def guardar_datos_restantes(driver, imagenes, nombre_de_screenshot):
     open_url(credentials["repartir_url"], driver)
     time.sleep(1)
     driver.execute_script("document.body.style.zoom='70%'")
     time.sleep(2)
     driver.execute_script("window.scrollBy(0,250)", "")
     time.sleep(2)
-    nombre_de_screenshot = f"DATOS RESTANTES DE HOY despues de forzar datos"
     take_screenshot(driver, imagenes, nombre_de_screenshot)
     print(f"Se guardo la screenshot {nombre_de_screenshot} a las {current_time_with_seconds()}")
 
@@ -281,20 +280,23 @@ try:
             datetime.datetime.now().hour == 9 or
             datetime.datetime.now().hour == 11):
         repartir_datos_STD_y_PREM_por_pedido(driver, imagenes)
+        guardar_datos_restantes(driver, imagenes, "DATOS RESTANTES DE HOY despues de forzar por pedido")
     if (datetime.datetime.now().hour == 15 or
             datetime.datetime.now().hour == 20 or
             datetime.datetime.now().hour == 23):
         repartir_datos_STD_y_PREM_por_acceso_por_datos_nuevos_y_datos_diarios(driver, imagenes)
+        guardar_datos_restantes(driver, imagenes, "DATOS RESTANTES DE HOY despues de forzar por acceso, datos nuevos y datos diarios")
         repartir_datos_STD_y_PREM_por_acceso_y_datos_diarios(driver, imagenes)
+        guardar_datos_restantes(driver, imagenes, "DATOS RESTANTES DE HOY despues de forzar por acceso y datos diarios")
     if datetime.datetime.now().hour == 20:
         if datetime.datetime.now().weekday() == 5 or datetime.datetime.now().weekday() == 6:
             repartir_datos_STD_y_PREM_datos_diarios(driver, imagenes)
+            guardar_datos_restantes(driver, imagenes, "DATOS RESTANTES DE HOY despues de forzar por datos diarios")
 
     # repartir_datos_STD_y_PREM(driver, imagenes, con_fecha_de_hoy=False)
     # repartir_datos_STD_y_PREM_por_SUPERVISOR(driver, imagenes)
     # repartir_datos_STD_y_PREM_por_SUPERVISOR(driver, imagenes, con_fecha_de_hoy=False)
 
-    guardar_datos_restantes(driver, imagenes)
 
 except Exception as e:
     print("Error al repartir los datos: ", e)
