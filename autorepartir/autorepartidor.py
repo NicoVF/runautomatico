@@ -276,6 +276,7 @@ try:
 
     open_url(credentials["login_url"], driver)
     login(driver)
+    guardar_datos_restantes(driver, imagenes, "DATOS RESTANTES DE HOY antes de repartir")
     if (datetime.datetime.now().hour == 8 or
             datetime.datetime.now().hour == 9 or
             datetime.datetime.now().hour == 11):
