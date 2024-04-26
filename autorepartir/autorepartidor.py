@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver import ActionChains, Keys
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -120,6 +121,43 @@ def repartir_datos_STD_y_PREM_datos_diarios(driver, imagenes, con_fecha_de_hoy=T
         nombre_de_screenshot = "STD y PREM con fecha de HOY - Por datos diarios"
     driver.find_element(By.ID, "id_accion").click()
     time.sleep(4)
+    driver.find_element(By.CSS_SELECTOR, "input[type='submit' i]").click()
+    time.sleep(110)
+    driver.execute_script("document.body.style.zoom='50%'")
+    time.sleep(10)
+    take_screenshot(driver, imagenes, nombre_de_screenshot)
+    print(f"Se repartio {nombre_de_screenshot} a las {current_time_with_seconds()}")
+
+
+def repartir_datos_STD_y_PREM_datos_diarios_EXCLUYENDO_DIETRICH(driver, imagenes, con_fecha_de_hoy=True):
+    open_url(credentials["repartir_url"], driver)
+    time.sleep(1)
+    driver.find_element(By.ID, "id_asignar_segun_0").click()
+    time.sleep(1)
+    driver.find_element(By.ID, "id_metodo_por_productividad").click()
+    time.sleep(1)
+    driver.find_element(By.ID, "id_aplicar_restricciones_del_pedido").click()
+    time.sleep(1)
+    driver.find_element(By.ID, "id_restricciones_0").click()
+    time.sleep(1)
+    # driver.find_element(By.ID, "id_restricciones_1").click()
+    # time.sleep(1)
+    # driver.find_element(By.ID, "id_restricciones_2").click()
+    # time.sleep(1)
+    nombre_de_screenshot = "STD y PREM sin fecha"
+    if con_fecha_de_hoy:
+        driver.find_element(By.ID, "id_fecha_desde").send_keys(fecha_actual)
+        time.sleep(4)
+        nombre_de_screenshot = "STD y PREM con fecha de HOY - Por datos diarios EXCLUYENDO DIETRICH (Menos Sobrante Dietrich)"
+    driver.find_element(By.ID, "id_accion").click()
+    time.sleep(4)
+    supervisores = driver.find_elements(By.XPATH, "//select[@id='id_responsables']/option[not(contains(.,'Dietrich')) or contains(.,'Sobrante Dietrich')]")
+    time.sleep(4)
+    for s in supervisores:
+        ActionChains(driver).key_down(Keys.CONTROL).click(s).key_up(Keys.CONTROL).perform()
+    time.sleep(4)
+    driver.find_element(By.ID, "id_descontar_a_pedidos").click()
+    time.sleep(20)
     driver.find_element(By.CSS_SELECTOR, "input[type='submit' i]").click()
     time.sleep(110)
     driver.execute_script("document.body.style.zoom='50%'")
@@ -291,8 +329,8 @@ try:
         guardar_datos_restantes(driver, imagenes, "DATOS RESTANTES DE HOY despues de forzar por acceso y datos diarios")
     if datetime.datetime.now().hour == 20:
         if datetime.datetime.now().weekday() == 5 or datetime.datetime.now().weekday() == 6:
-            repartir_datos_STD_y_PREM_datos_diarios(driver, imagenes)
-            guardar_datos_restantes(driver, imagenes, "DATOS RESTANTES DE HOY despues de forzar por datos diarios")
+            repartir_datos_STD_y_PREM_datos_diarios_EXCLUYENDO_DIETRICH(driver, imagenes)
+            guardar_datos_restantes(driver, imagenes, "DATOS RESTANTES DE HOY despues de forzar por datos diarios EXCLUYENDO DIETRICH")
 
     # repartir_datos_STD_y_PREM(driver, imagenes, con_fecha_de_hoy=False)
     # repartir_datos_STD_y_PREM_por_SUPERVISOR(driver, imagenes)
